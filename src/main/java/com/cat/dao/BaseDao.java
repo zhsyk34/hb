@@ -25,8 +25,9 @@ public class BaseDao<T> {
 	public void save(T t) {
 		Session session = session();
 		session.beginTransaction();
-		session.save(t);
+		session.persist(t);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	public void saves(Collection<T> collection) {
@@ -34,6 +35,7 @@ public class BaseDao<T> {
 		session.beginTransaction();
 		collection.forEach(t -> session.save(t));
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	public void delete(long id) {
@@ -41,6 +43,15 @@ public class BaseDao<T> {
 		session.beginTransaction();
 		session.delete(session.get(clazz, id));
 		session.getTransaction().commit();
+		session.close();
+	}
+
+	public void update(T t) {
+		Session session = session();
+		session.beginTransaction();
+		session.update(t);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	public T find(long id) {

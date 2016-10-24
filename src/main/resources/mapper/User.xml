@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.cat.entity">
+    <class name="User">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" length="60"/>
+        <!--<many-to-one name="personCard" column="cardId" cascade="all"/>-->
+        <set name="roles" cascade="all,delete-orphan" lazy="true">
+            <!--foreign-key="user_role"-->
+            <key column="userId" not-null="true"/>
+            <one-to-many class="Role"/>
+        </set>
+        <!--<list name="roles">
+            <key></key>
+            <index/>
+            <
+        </list>-->
+    </class>
+
+    <class name="Role">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <!--column="userId"-->
+        <!--property-ref="name"-->
+        <many-to-one name="user" class="User" column="userId" not-null="true" foreign-key="user_role" cascade="all"/>
+    </class>
+</hibernate-mapping>

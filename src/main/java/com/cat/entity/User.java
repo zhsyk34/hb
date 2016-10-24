@@ -2,24 +2,35 @@ package com.cat.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//@ToString
 public class User {
 
-	@Id
-	@GeneratedValue
+	//	@Id
+//	@GeneratedValue
 	private long id;
 
-	@Column(unique = true, nullable = false)
+	//	@Column(unique = true, nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Role> roleList;
+	//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Role> roles;
+
+	public User(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
+	}
 }

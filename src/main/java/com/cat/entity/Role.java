@@ -5,24 +5,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 //@ToString
 public class Role {
-	@Id
-	@GeneratedValue
+	//	@Id
+//	@GeneratedValue
 	private long id;
 
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "userId")
 
 	private String name;
+
+	private User user;
+
+	public Role(String name, User user) {
+		this.name = name;
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {

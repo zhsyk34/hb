@@ -22,7 +22,9 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!--<mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>-->
-        <mapping class="com.cat.entity.User"/>
-        <mapping class="com.cat.entity.Role"/>
+        <!--<mapping class="com.cat.entity.User"/>
+        <mapping class="com.cat.entity.Role"/>-->
+        <!--<mapping resource="mapper/Person.xml"/>-->
+        <mapping resource="mapper/User.xml"/>
     </session-factory>
 </hibernate-configuration>
