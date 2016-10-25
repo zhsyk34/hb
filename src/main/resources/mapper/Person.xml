@@ -2,16 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.cat.entity">
-    <class name="Person">
+    <!--<class name="Person">
         <id name="id" type="long">
             <generator class="foreign">
                 <param name="property">card</param>
             </generator>
         </id>
         <property name="name"/>
-        <!--<property name="card" type="int"/>-->
+        &lt;!&ndash;<property name="card" type="int"/>&ndash;&gt;
         <one-to-one name="card" class="Card" cascade="save-update" constrained="true"/>
-        <!--<many-to-one name="personCard" column="cardId" cascade="all"/>-->
+        &lt;!&ndash;<many-to-one name="personCard" column="cardId" cascade="all"/>&ndash;&gt;
     </class>
 
     <class name="Card">
@@ -19,5 +19,24 @@
             <generator class="native"/>
         </id>
         <property name="no"/>
+    </class>-->
+
+    <class name="Person">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <!--unique:true 变为one to one-->
+        <!--TODO:unique-key 无效-->
+        <many-to-one name="card" column="cardId" cascade="all" unique="true" foreign-key="cardId" unique-key="person_card" lazy="no-proxy"/>
+    </class>
+
+    <class name="Card">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="no"/>
+        <!--TODO:property-ref-->
+        <one-to-one name="person" class="Person" property-ref="card" cascade="all" lazy="proxy"/>
     </class>
 </hibernate-mapping>

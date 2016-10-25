@@ -8,9 +8,11 @@
         </id>
         <property name="name" length="60"/>
         <!--<many-to-one name="personCard" column="cardId" cascade="all"/>-->
-        <set name="roles" cascade="all,delete-orphan" lazy="true">
+        <set name="roles" cascade="all,delete-orphan" lazy="true" inverse="false" order-by="name">
             <!--foreign-key="user_role"-->
-            <key column="userId" not-null="true"/>
+            <!--not-null="true"-->
+            <!--若将 1 方设为主控方,会额外多出 update 语句。插入数据时无法同时插入外键列，因而无法为外键列添加非空约束.-->
+            <key column="userId"/>
             <one-to-many class="Role"/>
         </set>
         <!--<list name="roles">

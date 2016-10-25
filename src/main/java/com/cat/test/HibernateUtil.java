@@ -1,5 +1,7 @@
 package com.cat.test;
 
+import com.cat.interceptor.MyInterceptor;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -13,6 +15,8 @@ public class HibernateUtil {
 		try {
 			if (sessionFactory == null) {
 				Configuration configuration = new Configuration().configure(HibernateUtil.class.getResource("/hibernate.xml"));
+				//interceptor
+				configuration.setInterceptor(new MyInterceptor());
 				StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 				serviceRegistryBuilder.applySettings(configuration.getProperties());
 				ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
@@ -27,6 +31,10 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
+	}
+
+	public static Session session() {
+		return sessionFactory.openSession();
 	}
 
 	public static void shutdown() {

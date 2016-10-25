@@ -17,10 +17,10 @@ public class OneToMany {
 
 	public static void main(String[] args) {
 //		find();
-//		save();
+		save();
 //		delete();
 //		findList();
-		update();
+//		update();
 	}
 
 	private static void update() {
